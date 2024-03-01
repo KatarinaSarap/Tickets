@@ -38,8 +38,8 @@ class AccountManager:
 
     def login(self):
         # Login an existing user
-        username = input("Enter your username: ")
-        password = input("Enter your password: ")
+        username = input("Enter a username: ")
+        password = input("Enter a password: ")
 
         try:
             with open(self.users_file, 'r') as file:

@@ -1,12 +1,1 @@
-[
-  {
-    "user": "john_doe",
-    "type": "Train",
-    "price": "25"
-  },
-  {
-    "user": "jane_smith",
-    "type": "Plane",
-    "price": "300"
-  }
-]
+[{"user": "john_doe", "type": "Train", "price": "25"}, {"user": "jane_smith", "type": "Plane", "price": "300"}, {"user": "Kata", "type": "Rong", "price": "20"}, {"type": "Bus", "price": "5"}]

@@ -7,15 +7,18 @@ class TicketManager:
         # The file where tickets will be stored
         self.tickets_file = 'data/tickets.json'
 
-    def buy_ticket(self, user):
-        # Example of how you might structure a ticket purchase
-        print("Ticket purchase for user:", user)
+    def buy_ticket(self, user=None):
+        if user:
+            print(f"Ticket purchase for user: {user}")
+        else:
+            print("Guest ticket purchasing.")
+
         ticket_type = input("Enter ticket type (Train/Bus/Plane/Ship): ")
         price = input("Enter price: ")
-        # Implement actual ticket creation and storage logic here
 
-        # Example: Add ticket to tickets.json
-        new_ticket = {"user": user, "type": ticket_type, "price": price}
+        new_ticket = {"user": user, "type": ticket_type, "price": price} if user else {"type": ticket_type,
+                                                                                       "price": price}
+
         try:
             with open(self.tickets_file, 'r+') as file:
                 tickets = json.load(file)

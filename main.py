@@ -19,6 +19,7 @@ def main():
     # Create an instance of the AccountManager and TicketManager classes
     account_manager = AccountManager()
     ticket_manager = TicketManager()
+    current_user = None     # Tracks the logged-in user
 
     while True:
         # Display the main menu and get the user's choice
@@ -29,11 +30,18 @@ def main():
             if user_choice == 1:
                 account_manager.create_account()
             elif user_choice == 2:
-                account_manager.login()
+                current_user = account_manager.login()
             elif user_choice == 3:
-                ticket_manager.buy_ticket()
+                if current_user:
+                    ticket_manager.buy_ticket(current_user)
+                else:
+                    print("Continues as a guest...")
+                    ticket_manager.buy_ticket()
             elif user_choice == 4:
-                ticket_manager.check_ticket()
+                if current_user:
+                    ticket_manager.check_ticket()
+                else:
+                    ticket_manager.check_ticket(current_user)
             elif user_choice == 5:
                 print("Thank you for using the Ticket Purchase and Verification System. Goodbye!")
                 sys.exit()
