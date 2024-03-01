@@ -21,6 +21,9 @@ def main():
     ticket_manager = TicketManager()
     current_user = None     # Tracks the logged-in user
 
+
+
+    # Display the main menu and get the user's choice
     while True:
         # Display the main menu and get the user's choice
         user_choice = display_main_menu()
@@ -28,19 +31,22 @@ def main():
             user_choice = int(user_choice)
 
             if user_choice == 1:
-                account_manager.create_account()
+                if not account_manager.is_user_logged_in():
+                    account_manager.create_account()
             elif user_choice == 2:
-                current_user = account_manager.login()
+                if not account_manager.is_user_logged_in():
+                    current_user = account_manager.login()
+                    if not current_user:
+                        print("Login failed. Please try again or create an account.")
             elif user_choice == 3:
                 if current_user:
                     ticket_manager.buy_ticket(current_user)
-
                 else:
                     print("Continues as a guest...")
                     ticket_manager.buy_ticket()
             elif user_choice == 4:
                 if current_user:
-                    ticket_manager.check_ticket(current_user)
+                    ticket_manager.check_ticket()
                 else:
                     print("Continues as a guest...")
                     ticket_manager.check_ticket()
@@ -48,7 +54,7 @@ def main():
                 print("Thank you for using the Ticket Purchase and Verification System. Goodbye!")
                 sys.exit()
         else:
-            print("Invalid option, please try again.")
+            print("Please try again.")
 
 
 if __name__ == "__main__":

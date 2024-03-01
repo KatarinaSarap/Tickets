@@ -1,5 +1,6 @@
 import json
 import datetime
+from modules.account_manager import AccountManager
 
 
 class TicketManager:
@@ -7,6 +8,76 @@ class TicketManager:
     def __init__(self):
         # The file where tickets will be stored
         self.tickets_file = 'data/tickets.json'
+
+    def display_tickets(ticket_manager):
+        # This function should list available tickets and allow users to select one
+        # You might need to implement this functionality in TicketManager
+        ticket_manager.list_tickets()
+
+    def main(self):
+        account_manager = AccountManager()
+        ticket_manager = TicketManager()
+
+        while True:
+            if account_manager.is_admin_logged_in():
+                # Admin specific options
+                print("\nAdmin Menu:")
+                print("1. Create Tickets")
+                print("2. Exit")
+                choice = input("Please select an option: ")
+                if choice == '1':
+                    ticket_manager.buy_ticket()  # Assuming this method now creates tickets
+                elif choice == '2':
+                    break  # Exit the application
+            elif account_manager.is_user_logged_in():
+                # Regular user menu
+                print("\nUser Menu:")
+                print("1. View Available Tickets")
+                print("2. Exit")
+                choice = input("Please select an option: ")
+                if choice == '1':
+                    TicketManager.list_tickets(ticket_manager)
+                elif choice == '2':
+                    break  # Exit the application
+            else:
+                # Guest user menu
+                print("\nGuest Menu:")
+                print("1. View Available Tickets")
+                print("2. Exit")
+                choice = input("Please select an option: ")
+                if choice == '1':
+                    print("Continues as a guest...")
+                    TicketManager.list_tickets(ticket_manager)
+                elif choice == '2':
+                    break  # Exit the application
+
+    if __name__ == "__main__":
+        main()
+
+    def list_tickets(self):
+        try:
+            with open(self.tickets_file, 'r') as file:
+                tickets = json.load(file)
+        except FileNotFoundError:
+            print("No tickets file found.")
+            return
+
+        print("\nAvailable Tickets:")
+        for idx, ticket in enumerate(tickets, start=1):
+            print(
+                f"{idx}. {ticket['type']} from {ticket['departure']} to {ticket['destination']} at {ticket['price']} euros, expires on {ticket['expiration_date']}.")
+
+        # Allow users to select a ticket
+        try:
+            choice = int(input("Enter the number of the ticket you want to view (or 0 to exit): "))
+            if choice == 0:
+                return
+            selected_ticket = tickets[choice - 1]
+            print(
+                f"You selected a {selected_ticket['type']} ticket from {selected_ticket['departure']} to {selected_ticket['destination']} at {selected_ticket['price']} euros.")
+            # Here you can add logic to "purchase" or reserve the selected ticket
+        except (ValueError, IndexError):
+            print("Invalid selection. Please try again.")
 
     def buy_ticket(self, user=None):
         if not user:

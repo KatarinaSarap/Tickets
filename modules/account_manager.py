@@ -7,8 +7,11 @@ from utils.password_utils import verify_password
 class AccountManager:
     # This class is responsible for managing user accounts
     def __init__(self):
-        self.users_file = 'data/users.json'
-        self.users = read_json_file(self.users_file) or {}
+            self.users_file = 'data/users.json'
+            self.users = read_json_file(self.users_file) or {}
+            self.current_user = None
+    def is_admin_logged_in(self):
+        return self.current_user == "Admin"
 
     def create_account(self):
         # Create a new user account
@@ -45,17 +48,17 @@ class AccountManager:
         try:
             with open(self.users_file, 'r') as file:
                 users = json.load(file)
-
-            if username in users:
-                stored_hash = users[username]['password']
-                if verify_password(password, stored_hash):
-                    print("Login successful.")
-                    self.current_user = username
-                    print("You have successfully logged in!")
-                else:
-                    print("Invalid username or password.")
+            if username in users and verify_password(password, users[username]['password']):
+                print("Login successful.")
+                self.current_user = username
+                print("You have successfully logged in!")
+                return True
+            else:
+                print("Invalid username or password.")
+                return False
         except FileNotFoundError:
             print("Unable to load user data.")
+            return False
 
     def is_user_logged_in(self):
         # Check if a user is currently logged in
