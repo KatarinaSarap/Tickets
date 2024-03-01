@@ -10,8 +10,11 @@ class AccountManager:
             self.users_file = 'data/users.json'
             self.users = read_json_file(self.users_file) or {}
             self.current_user = None
+
     def is_admin_logged_in(self):
-        return self.current_user == "Admin"
+        # Implement logic to check if the logged-in user is an admin
+        # This is a placeholder; adjust according to your authentication logic
+        return self.current_user_role == 'admin'
 
     def create_account(self):
         # Create a new user account

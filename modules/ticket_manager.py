@@ -28,14 +28,11 @@ class TicketManager:
                 # Menu for regular users and guests
                 print("\nMenu:")
                 print("1. View Available Tickets")
-                print("2. Buy a Ticket")
-                print("3. Exit")
+                print("2. Exit")
                 choice = input("Please select an option: ")
                 if choice == '1':
                     ticket_manager.list_tickets()
-
-                elif choice == '2':
-                    ticket_manager.buy_ticket()  # Invokes the ticket buying process
+                    # first shows the list of tickets, then lets pick one for purchase
                 elif choice == '3':
                     break  # Exit the application
 
