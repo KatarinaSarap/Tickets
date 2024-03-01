@@ -1,5 +1,6 @@
 import json
 from utils.file_handler import read_json_file
+from utils.password_utils import hash_password
 
 class AccountManager:
     # This class is responsible for managing user accounts
@@ -11,8 +12,10 @@ class AccountManager:
         # Create a new user account
         username = input("Enter a username: ")
         password = input("Enter a password: ")
-        # Here, you would ideally hash the password before storing it.
-        new_user = {"username": username, "password": password}
+        hashed_password = hash_password(password)   # Hashing the password
+
+        # Storing the hashed password
+        new_user = {"username": username, "password": hashed_password}
 
         try:
             # Open the file and load the existing users
@@ -32,29 +35,28 @@ class AccountManager:
             print("Account created successfully.")
 
     def login(self):
-        # Log in to an existing account
         username = input("Enter your username: ")
         password = input("Enter your password: ")
 
-        try:
-            # Open the file and load the existing users
-            with open(self.users_file, 'r') as file:
-                users = json.load(file)
-                if username in users and users[username]["password"] == password:
-                    print("Login successful.")
-                    self.current_user = username
-                else:
-                    print("Invalid username or password.")
-        except FileNotFoundError:
-            # If the file doesn't exist, there are no users yet
-            print("No accounts found. Please create an account first.")
+        # Load the user data (assuming you have a method or process for this)
+        users = self.load_users()  # Placeholder for your user loading logic
+        if username in users:
+            stored_hash = users[username]['password']
+            if verify_password(password, stored_hash):
+                print("Login successful.")
+                self.current_user = username
+                # You might want to set other flags or data indicating a successful login
+            else:
+                print("Invalid username or password.")
+        else:
+            print("Username does not exist.")
 
     def is_user_logged_in(self):
         # Check if a user is currently logged in
         return self.current_user is not None
 
     def get_current_user(self):
-        # Get the username of the currently logged in user
+        # Get the username of the currently logged-in user
         return self.current_user
 
     def logout(self):
