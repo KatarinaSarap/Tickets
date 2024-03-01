@@ -41,19 +41,20 @@ class AccountManager:
         username = input("Enter your username: ")
         password = input("Enter your password: ")
 
-        # Load the user data (assuming you have a method or process for this)
-        users = self.load_users()  # Placeholder for your user loading logic
-        if username in users:
-            stored_hash = users[username]['password']
-            if verify_password(password, stored_hash):
-                print("Login successful.")
-                self.current_user = username
-                # You might want to set other flags or data indicating a successful login
-                print ("You have successfully logged in!")
-            else:
-                print("Invalid username or password.")
-        else:
-            print("Username does not exist.")
+        try:
+            with open(self.users_file, 'r') as file:
+                users = json.load(file)
+
+            if username in users:
+                stored_hash = users[username]['password']
+                if verify_password(password, stored_hash):
+                    print("Login successful.")
+                    self.current_user = username
+                    print("You have successfully logged in!")
+                else:
+                    print("Invalid username or password.")
+        except FileNotFoundError:
+            print("Unable to load user data.")
 
     def is_user_logged_in(self):
         # Check if a user is currently logged in
