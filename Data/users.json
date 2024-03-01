@@ -1,1 +1,10 @@
-{"Kata": {"username": "Kata", "password": "$2b$12$8nIUHH9FF9v.r7WQ5Zf/QeEti/MVMWr5JAxcVkF8MjrahEp0e0klK"}}
+{
+    "Kata": {
+        "username": "Kata",
+        "password": "$2b$12$5Yb7DyFaMo9.GJpZ5ZqnSege39.QNuMtdU.6NoG3AQs9bKf3bnoHe"
+    },
+    "Admin": {
+        "username": "Admin",
+        "password": "$2b$12$5ho4YwHFgbbFk.9004AevOQyov4pEVRdNj7u2DNVmcYFG40uhz6OO"
+    }
+}

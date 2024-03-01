@@ -34,6 +34,7 @@ def main():
             elif user_choice == 3:
                 if current_user:
                     ticket_manager.buy_ticket(current_user)
+
                 else:
                     print("Continues as a guest...")
                     ticket_manager.buy_ticket()

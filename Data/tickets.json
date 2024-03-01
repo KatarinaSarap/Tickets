@@ -1,23 +1,5 @@
 [
     {
-        "user": null,
-        "type": "Plane",
-        "price": "15",
-        "expiration_date": "2024-03-11"
-    },
-    {
-        "user": null,
-        "type": "Ship",
-        "price": "30",
-        "expiration_date": "2024-03-11"
-    },
-    {
-        "user": null,
-        "type": "Ship",
-        "price": "30",
-        "expiration_date": "2024-03-11"
-    },
-    {
         "user": "Kata",
         "type": "Plane",
         "price": "50",

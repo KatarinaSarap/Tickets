@@ -23,12 +23,13 @@ class AccountManager:
             # Open the file and load the existing users
             with open(self.users_file, 'r+') as file:
                 users = json.load(file)
+                # Check if the username is available
                 if username in users:
                     print("An account with this username already exists.")
                     return
                 users[username] = new_user
                 file.seek(0)
-                json.dump(users, file)
+                json.dump(users, file, indent=4)
             print("Account created successfully.")
         except FileNotFoundError:
             # If the file doesn't exist, create it and add the new user
