@@ -41,14 +41,21 @@ class TicketManager:
                     print("No tickets found for this user.")
                     return
 
-                # Check if any ticket is valid based on the expiration date
-                valid_tickets = [ticket for ticket in user_tickets if
-                                 datetime.datetime.strptime(ticket["expiration_date"],
-                                                            '%Y-%m-%d') >= datetime.datetime.now()]
+                    # Check if any ticket is valid based on the expiration date
+                now = datetime.datetime.now()
+                valid_tickets = []
+                for ticket in user_tickets:
+                    expiration_date = ticket.get("expiration_date")
+                    if expiration_date:
+                        if datetime.datetime.strptime(expiration_date, '%Y-%m-%d') >= now:
+                                valid_tickets.append(ticket)
+                    else:
+                        print("Some tickets are missing an expiration date.")
+
                 if valid_tickets:
                     print("You have valid ticket(s).")
                     # Optionally, provide details about the valid tickets
                 else:
-                    print("All your tickets have expired.")
+                    print("All your tickets have expired or are invalid due to missing expiration date.")
         except FileNotFoundError:
             print("Tickets file not found.")
