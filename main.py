@@ -1,16 +1,45 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+import sys
+from modules.account_manager import AccountManager
+from modules.ticket_manager import TicketManager
+from utils.input_validator import validate_input
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def display_main_menu():
+    # Display the main menu
+    print("\nWelcome to the Ticket Purchase and Verification System")
+    print("1. Create an account")
+    print("2. Login")
+    print("3. Buy a ticket")
+    print("4. Check a ticket")
+    print("5. Exit")
+    return input("Please select an option: ")
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+
+def main():
+    # Create an instance of the AccountManager and TicketManager classes
+    account_manager = AccountManager()
+    ticket_manager = TicketManager()
+
+    while True:
+        # Display the main menu and get the user's choice
+        user_choice = display_main_menu()
+        if validate_input(user_choice, range(1, 6)):
+            user_choice = int(user_choice)
+
+            if user_choice == 1:
+                account_manager.create_account()
+            elif user_choice == 2:
+                account_manager.login()
+            elif user_choice == 3:
+                ticket_manager.buy_ticket()
+            elif user_choice == 4:
+                ticket_manager.check_ticket()
+            elif user_choice == 5:
+                print("Thank you for using the Ticket Purchase and Verification System. Goodbye!")
+                sys.exit()
+        else:
+            print("Invalid option, please try again.")
+
+
+if __name__ == "__main__":
+    main()
