@@ -9,10 +9,12 @@ class TicketManager:
         self.tickets_file = 'data/tickets.json'
 
     def buy_ticket(self, user=None):
-        if user:
-            print(f"Ticket purchase for user: {user}")
+        if not user:
+            # Prompt for a guest identifier
+            user = input("Enter a name or pseudonym for ticket verification: ")
+            print("Guest ticket purchasing as:", user)
         else:
-            print("Guest ticket purchasing.")
+            print(f"Ticket purchase for user: {user}")
 
         ticket_type = input("Enter ticket type (Train/Bus/Plane/Ship): ")
         price = input("Enter price: ")
@@ -24,11 +26,11 @@ class TicketManager:
                 tickets = json.load(file)
                 tickets.append(new_ticket)
                 file.seek(0)
-                json.dump(tickets, file)
+                json.dump(tickets, file, indent=4)  # Add indent parameter for better formatting
             print("Ticket purchased successfully.")
         except FileNotFoundError:
             with open(self.tickets_file, 'w') as file:
-                json.dump([new_ticket], file)
+                json.dump([new_ticket], file, indent=4)  # Use indent here as well
             print("Ticket purchased successfully.")
 
     def check_ticket(self):

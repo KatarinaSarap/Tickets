@@ -32,8 +32,8 @@ class AccountManager:
             print("Account created successfully.")
         except FileNotFoundError:
             # If the file doesn't exist, create it and add the new user
-            with open(self.users_file, 'w') as file:
-                json.dump({username: new_user}, file)
+            with open(self.tickets_file, 'w') as file:
+                json.dump({username: new_user}, file, indent=4)
             print("Account created successfully.")
 
     def login(self):
