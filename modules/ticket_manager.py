@@ -9,11 +9,6 @@ class TicketManager:
         # The file where tickets will be stored
         self.tickets_file = 'data/tickets.json'
 
-    def display_tickets(ticket_manager):
-        # This function should list available tickets and allow users to select one
-        # You might need to implement this functionality in TicketManager
-        ticket_manager.list_tickets()
-
     def main(self):
         account_manager = AccountManager()
         ticket_manager = TicketManager()
@@ -29,30 +24,20 @@ class TicketManager:
                     ticket_manager.buy_ticket()  # Assuming this method now creates tickets
                 elif choice == '2':
                     break  # Exit the application
-            elif account_manager.is_user_logged_in():
-                # Regular user menu
-                print("\nUser Menu:")
-                print("1. View Available Tickets")
-                print("2. Exit")
-                choice = input("Please select an option: ")
-                if choice == '1':
-                    TicketManager.list_tickets(ticket_manager)
-                elif choice == '2':
-                    break  # Exit the application
             else:
-                # Guest user menu
-                print("\nGuest Menu:")
+                # Menu for regular users and guests
+                print("\nMenu:")
                 print("1. View Available Tickets")
-                print("2. Exit")
+                print("2. Buy a Ticket")
+                print("3. Exit")
                 choice = input("Please select an option: ")
                 if choice == '1':
-                    print("Continues as a guest...")
-                    TicketManager.list_tickets(ticket_manager)
-                elif choice == '2':
-                    break  # Exit the application
+                    ticket_manager.list_tickets()
 
-    if __name__ == "__main__":
-        main()
+                elif choice == '2':
+                    ticket_manager.buy_ticket()  # Invokes the ticket buying process
+                elif choice == '3':
+                    break  # Exit the application
 
     def list_tickets(self):
         try:
@@ -75,7 +60,6 @@ class TicketManager:
             selected_ticket = tickets[choice - 1]
             print(
                 f"You selected a {selected_ticket['type']} ticket from {selected_ticket['departure']} to {selected_ticket['destination']} at {selected_ticket['price']} euros.")
-            # Here you can add logic to "purchase" or reserve the selected ticket
         except (ValueError, IndexError):
             print("Invalid selection. Please try again.")
 
@@ -88,9 +72,11 @@ class TicketManager:
             print(f"Ticket purchase for user: {user}")
 
         ticket_type = input("Enter ticket type (Train/Bus/Plane/Ship): ")
+        departure = input("Enter the departure place (city or station):")
+        destination = input("Enter the destination (city or station):")
         price = input("Enter price: ")
         expiration_date = (datetime.datetime.now() + datetime.timedelta(days=10)).strftime('%Y-%m-%d')
-        new_ticket = {"user": user, "type": ticket_type, "price": price, "expiration_date": expiration_date}
+        new_ticket = {"user": user, "type": ticket_type, "price": price, "departure": departure, "destination":destination, "expiration date":expiration_date}
 
         try:
             with open(self.tickets_file, 'r+') as file:
@@ -98,11 +84,11 @@ class TicketManager:
                 tickets.append(new_ticket)
                 file.seek(0)
                 json.dump(tickets, file, indent=4)  # Add indent parameter for better formatting
-            print("Ticket purchased successfully.")
+            print("Ticket made successfully.")
         except FileNotFoundError:
             with open(self.tickets_file, 'w') as file:
                 json.dump([new_ticket], file, indent=4)  # Use indent here as well
-            print("Ticket purchased successfully.")
+            print("Ticket made successfully.")
 
     def check_ticket(self):
         username = input("Enter your (user)name to check your ticket: ")
@@ -132,3 +118,6 @@ class TicketManager:
                     print("All your tickets have expired or are invalid due to missing expiration date.")
         except FileNotFoundError:
             print("Tickets file not found.")
+
+    if __name__ == "__main__":
+        main()

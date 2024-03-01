@@ -6,15 +6,10 @@
         "expiration_date": "2024-03-11"
     },
     {
-        "user": true,
-        "type": "Bus",
-        "price": "4",
-        "expiration_date": "2024-03-11"
-    },
-    {
         "user": "What",
         "type": "Ship",
         "price": "25",
         "expiration_date": "2024-03-11"
-    }
+    },
+
 ]
