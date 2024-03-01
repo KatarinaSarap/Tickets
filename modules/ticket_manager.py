@@ -1,5 +1,6 @@
 import json
 import datetime
+import sys
 from modules.account_manager import AccountManager
 
 
@@ -13,28 +14,28 @@ class TicketManager:
         account_manager = AccountManager()
         ticket_manager = TicketManager()
 
-        while True:
-            if account_manager.is_admin_logged_in():
-                # Admin specific options
-                print("\nAdmin Menu:")
-                print("1. Create Tickets")
-                print("2. Exit")
-                choice = input("Please select an option: ")
-                if choice == '1':
-                    ticket_manager.buy_ticket()  # Assuming this method now creates tickets
-                elif choice == '2':
-                    break  # Exit the application
-            else:
-                # Menu for regular users and guests
-                print("\nMenu:")
-                print("1. View Available Tickets")
-                print("2. Exit")
-                choice = input("Please select an option: ")
-                if choice == '1':
-                    ticket_manager.list_tickets()
-                    # first shows the list of tickets, then lets pick one for purchase
-                elif choice == '3':
-                    break  # Exit the application
+    def admin_menu(self):
+        # Admin specific options
+        print("\nAdmin Menu:")
+        print("1. Create Tickets")
+        print("2. Exit")
+        choice = input("Please select an option: ")
+        if choice == '1':
+            self.buy_ticket(self, user=None)  # Assuming this method now creates tickets
+        elif choice == '2':     # Exit the application
+            sys.exit()
+
+    def user_menu(self):
+        # Menu for regular users and guests
+        print("\nMenu:")
+        print("1. View Available Tickets")
+        print("2. Exit")
+        choice = input("Please select an option: ")
+        if choice == '1':
+            self.list_tickets()
+            # first shows the list of tickets, then lets pick one for purchase
+        elif choice == '2':
+            sys.exit()
 
     def list_tickets(self):
         try:

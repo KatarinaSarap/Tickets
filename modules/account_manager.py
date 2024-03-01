@@ -7,9 +7,9 @@ from utils.password_utils import verify_password
 class AccountManager:
     # This class is responsible for managing user accounts
     def __init__(self):
-            self.users_file = 'data/users.json'
-            self.users = read_json_file(self.users_file) or {}
-            self.current_user = None
+        self.users_file = 'data/users.json'
+        self.users = read_json_file(self.users_file) or {}
+        self.current_user = None
 
     def is_admin_logged_in(self):
         # Implement logic to check if the logged-in user is an admin
@@ -52,8 +52,10 @@ class AccountManager:
             with open(self.users_file, 'r') as file:
                 users = json.load(file)
             if username in users and verify_password(password, users[username]['password']):
-                print("Login successful.")
+                print("Login successful")
                 self.current_user = username
+                # Example adjustment: Set role for the current session
+                self.current_user_role = users[username].get('role', 'regular')  # Default to 'regular' if not specified
                 print("You have successfully logged in!")
                 return True
             else:

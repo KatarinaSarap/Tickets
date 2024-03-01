@@ -39,11 +39,11 @@ def main():
                     if not current_user:
                         print("Login failed. Please try again or create an account.")
             elif user_choice == 3:
-                if current_user:
-                    ticket_manager.buy_ticket(current_user)
-                else:
+                if account_manager.is_admin_logged_in():
+                    ticket_manager.admin_menu()
+                else :
                     print("Continues as a guest...")
-                    ticket_manager.buy_ticket()
+                    ticket_manager.user_menu()
             elif user_choice == 4:
                 if current_user:
                     ticket_manager.check_ticket()
@@ -58,5 +58,4 @@ def main():
 
 
 if __name__ == "__main__":
-
     main()
