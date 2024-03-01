@@ -1,4 +1,5 @@
 import json
+import datetime
 
 
 class TicketManager:
@@ -15,9 +16,8 @@ class TicketManager:
 
         ticket_type = input("Enter ticket type (Train/Bus/Plane/Ship): ")
         price = input("Enter price: ")
-
-        new_ticket = {"user": user, "type": ticket_type, "price": price} if user else {"type": ticket_type,
-                                                                                       "price": price}
+        expiration_date = (datetime.datetime.now() + datetime.timedelta(days=10)).strftime('%Y-%m-%d')
+        new_ticket = {"user": user, "type": ticket_type, "price": price, "expiration_date": expiration_date}
 
         try:
             with open(self.tickets_file, 'r+') as file:
@@ -32,6 +32,23 @@ class TicketManager:
             print("Ticket purchased successfully.")
 
     def check_ticket(self):
-        # Implement the logic to check the validity of a ticket
-        print("Checking ticket validity...")
-        # This is where you'd implement the actual checking logic
+        username = input("Enter your (user)name to check your ticket: ")
+        try:
+            with open(self.tickets_file, 'r') as file:
+                tickets = json.load(file)
+                user_tickets = [ticket for ticket in tickets if ticket.get("user") == username]
+                if not user_tickets:
+                    print("No tickets found for this user.")
+                    return
+
+                # Check if any ticket is valid based on the expiration date
+                valid_tickets = [ticket for ticket in user_tickets if
+                                 datetime.datetime.strptime(ticket["expiration_date"],
+                                                            '%Y-%m-%d') >= datetime.datetime.now()]
+                if valid_tickets:
+                    print("You have valid ticket(s).")
+                    # Optionally, provide details about the valid tickets
+                else:
+                    print("All your tickets have expired.")
+        except FileNotFoundError:
+            print("Tickets file not found.")

@@ -39,9 +39,10 @@ def main():
                     ticket_manager.buy_ticket()
             elif user_choice == 4:
                 if current_user:
-                    ticket_manager.check_ticket()
-                else:
                     ticket_manager.check_ticket(current_user)
+                else:
+                    print("Continues as a guest...")
+                    ticket_manager.check_ticket()
             elif user_choice == 5:
                 print("Thank you for using the Ticket Purchase and Verification System. Goodbye!")
                 sys.exit()
