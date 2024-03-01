@@ -1,6 +1,8 @@
 import json
 from utils.file_handler import read_json_file
 from utils.password_utils import hash_password
+from utils.password_utils import verify_password
+
 
 class AccountManager:
     # This class is responsible for managing user accounts
@@ -35,6 +37,7 @@ class AccountManager:
             print("Account created successfully.")
 
     def login(self):
+        # Login an existing user
         username = input("Enter your username: ")
         password = input("Enter your password: ")
 
@@ -46,6 +49,7 @@ class AccountManager:
                 print("Login successful.")
                 self.current_user = username
                 # You might want to set other flags or data indicating a successful login
+                print ("You have successfully logged in!")
             else:
                 print("Invalid username or password.")
         else:

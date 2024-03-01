@@ -7,7 +7,7 @@ from utils.input_validator import validate_input
 def display_main_menu():
     # Display the main menu
     print("\nWelcome to the Ticket Purchase and Verification System")
-    print("1. Create 5an account")
+    print("1. Create an account")
     print("2. Login")
     print("3. Buy a ticket")
     print("4. Check a ticket")
@@ -42,4 +42,5 @@ def main():
 
 
 if __name__ == "__main__":
+
     main()
