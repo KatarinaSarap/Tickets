@@ -38,12 +38,9 @@ def main():
             elif user_choice == 3:
                 if account_manager.is_admin_logged_in():
                     ticket_manager.admin_menu()
-                elif account_manager.is_user_logged_in():
-                    # Regular user flow
-                    ticket_manager.user_menu()
                 else:
                     # Guest flow
-                    print("Continues as a guest...")
+                    print("Continues to purchasing")
                     ticket_manager.user_menu()
             elif user_choice == 4:
                 if current_user:

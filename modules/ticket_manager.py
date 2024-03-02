@@ -48,33 +48,28 @@ class TicketManager:
         print("\nAvailable Tickets:")
         for idx, ticket in enumerate(tickets, start=1):
             print(
-                f"{idx}. {ticket['type']} from {ticket['departure']} to {ticket['destination']} at {ticket['price']} euros, expires on {ticket['expiration_date']}.")
+                f"{idx}. {ticket['type']} from {ticket['departure']} to {ticket['destination']} for {ticket['price']} euros, expires on {ticket['expiration_date']}, and it's a {info['info']}.")
 
         # Allow users to select a ticket
         try:
-            choice = int(input("Enter the number of the ticket you want to view (or 0 to exit): "))
+            choice = int(input("Enter the number of the ticket you want to purchase (or 0 to exit): "))
             if choice == 0:
                 return
             selected_ticket = tickets[choice - 1]
             print(
-                f"You selected a {selected_ticket['type']} ticket from {selected_ticket['departure']} to {selected_ticket['destination']} at {selected_ticket['price']} euros.")
+                f"You purchased a {selected_ticket['type']} ticket from {selected_ticket['departure']} to {selected_ticket['destination']} for {selected_ticket['price']} euros, and it's a {info['info']}.")
         except (ValueError, IndexError):
             print("Invalid selection. Please try again.")
 
-    def buy_ticket(self, user=None):
-        if not user:
-            # Prompt for a guest identifier
-            user = input("Enter a name or pseudonym for ticket verification: ")
-            print("Guest ticket purchasing as:", user)
-        else:
-            print(f"Ticket purchase for user: {user}")
+    def buy_ticket(self):
 
         ticket_type = input("Enter ticket type (Train/Bus/Plane/Ship): ")
         departure = input("Enter the departure place (city or station):")
         destination = input("Enter the destination (city or station):")
         price = input("Enter price: ")
         expiration_date = (datetime.datetime.now() + datetime.timedelta(days=10)).strftime('%Y-%m-%d')
-        new_ticket = {"user": user, "type": ticket_type, "price": price, "departure": departure, "destination":destination, "expiration date":expiration_date}
+        info = input("Entre extra details about the ticket:")
+        new_ticket = {"type": ticket_type, "price": price, "departure": departure, "destination": destination, "expiration date": expiration_date, "info": info}
 
         try:
             with open(self.tickets_file, 'r+') as file:
