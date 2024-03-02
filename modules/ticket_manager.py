@@ -11,7 +11,6 @@ class TicketManager:
         self.tickets_file = 'data/tickets.json'
 
     def main(self):
-        account_manager = AccountManager()
         ticket_manager = TicketManager()
 
     def admin_menu(self):
