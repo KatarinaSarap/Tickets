@@ -31,22 +31,16 @@ def main():
                 if not account_manager.is_user_logged_in():
                     account_manager.create_account()
             elif user_choice == 2:
-                if not account_manager.is_user_logged_in():
-                    current_user = account_manager.login()
-                    if not current_user:
-                        print("Login failed. Please try again or create an account.")
+                login_successful, role = account_manager.login()
+                if login_successful:
+                    if role == "Admin":
+                        # Display the admin-specific menu
+                        ticket_manager.admin_menu()  # Assuming this method exists and shows admin options
+                    else:
+                        display_main_menu()
             elif user_choice == 3:
-                # Differentiate between admin and non-admin users for buying tickets
-                if account_manager.is_admin_logged_in():
-                    ticket_manager.admin_menu()
-                else:
-                    # Both guests and logged-in non-admin users proceed to buy tickets as usual
                     ticket_manager.user_menu()
             elif user_choice == 4:
-                if current_user:
-                    ticket_manager.check_ticket()
-                else:
-                    print("Continues as a guest...")
                     ticket_manager.check_ticket()
             elif user_choice == 5:
                 print("Thank you for using the Ticket Purchase and Verification System. Goodbye!")

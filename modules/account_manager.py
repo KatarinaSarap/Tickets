@@ -51,14 +51,15 @@ class AccountManager:
                 users = json.load(file)
             if username in users and verify_password(password, users[username]['password']):
                 self.current_user = username
-                print("Login successful. Welcome, " + ("Admin" if username.lower() == "admin" else "User") + "!")
-                return True
+                role = "Admin" if username.lower() == "admin" else "User"
+                print(f"Login successful. Welcome, {role}!")
+                return True, role  # Return both login status and role
             else:
                 print("Invalid username or password.")
-                return False
+                return False, None
         except FileNotFoundError:
             print("Unable to load user data.")
-            return False
+            return False, None
 
     def is_user_logged_in(self):
         # Check if a user is currently logged in
