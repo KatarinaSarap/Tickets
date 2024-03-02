@@ -48,7 +48,7 @@ class TicketManager:
         print("\nAvailable Tickets:")
         for idx, ticket in enumerate(tickets, start=1):
             print(
-                f"{idx}. {ticket['type']} from {ticket['departure']} to {ticket['destination']} for {ticket['price']} euros, expires on {ticket['expiration_date']}, and it's a {info['info']}.")
+                f"{idx}. {ticket['info']} {ticket['type']} ticket from {ticket['departure']} to {ticket['destination']} for {ticket['price']} euros, expires on {ticket['expiration_date']}.")
 
         # Allow users to select a ticket
         try:
@@ -57,7 +57,7 @@ class TicketManager:
                 return
             selected_ticket = tickets[choice - 1]
             print(
-                f"You purchased a {selected_ticket['type']} ticket from {selected_ticket['departure']} to {selected_ticket['destination']} for {selected_ticket['price']} euros, and it's a {info['info']}.")
+                f"Email: Thank you for purchasing a {selected_ticket['info']} {selected_ticket['type']} ticket from {selected_ticket['departure']} to {selected_ticket['destination']} for {selected_ticket['price']} euros.")
         except (ValueError, IndexError):
             print("Invalid selection. Please try again.")
 
@@ -68,7 +68,7 @@ class TicketManager:
         destination = input("Enter the destination (city or station):")
         price = input("Enter price: ")
         expiration_date = (datetime.datetime.now() + datetime.timedelta(days=10)).strftime('%Y-%m-%d')
-        info = input("Entre extra details about the ticket:")
+        info = input("Entre extra details about the ticket(Business or Economy):")
         new_ticket = {"type": ticket_type, "price": price, "departure": departure, "destination": destination, "expiration date": expiration_date, "info": info}
 
         try:

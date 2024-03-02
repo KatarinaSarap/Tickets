@@ -40,7 +40,7 @@ def main():
                     ticket_manager.admin_menu()
                 else:
                     # Guest flow
-                    print("Continues to purchasing")
+                    print("Moving to ticket viewing and purchasing.")
                     ticket_manager.user_menu()
             elif user_choice == 4:
                 if current_user:

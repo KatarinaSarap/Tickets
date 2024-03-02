@@ -15,44 +15,42 @@ class AccountManager:
         return self.get_current_user() == "admin"
 
     def create_account(self):
-        # Create a new user account
-        username = input("Enter a username: ")
+        username = input("Enter a username: ").strip()
+        if username.lower() == "admin":
+            print("This username is reserved and cannot be used.")
+            return
+
         password = input("Enter a password: ")
-        hashed_password = hash_password(password)   # Hashing the password
+        hashed_password = hash_password(password)  # Hashing the password
 
-        # Storing the hashed password
-        new_user = {"username": username, "password": hashed_password}
-
+        # Attempt to open the users file and add the new user
         try:
-            # Open the file and load the existing users
             with open(self.users_file, 'r+') as file:
                 users = json.load(file)
-                # Check if the username is available
                 if username in users:
                     print("An account with this username already exists.")
                     return
-                users[username] = new_user
-                file.seek(0)
-                json.dump(users, file, indent=4)
-            print("Account created successfully.")
+                else:
+                    users[username] = {"password": hashed_password}
+                    file.seek(0)
+                    json.dump(users, file, indent=4)
+                    print("Account created successfully.")
         except FileNotFoundError:
-            # If the file doesn't exist, create it and add the new user
             with open(self.users_file, 'w') as file:
-                json.dump({username: new_user}, file, indent=4)
-            print("Account created successfully.")
+                json.dump({username: {"password": hashed_password}}, file, indent=4)
+                print("Account created successfully.")
 
     def login(self):
         # Login an existing user
-        username = input("Enter a username: ")
+        username = input("Enter a username: ").strip()
         password = input("Enter a password: ")
 
         try:
             with open(self.users_file, 'r') as file:
                 users = json.load(file)
             if username in users and verify_password(password, users[username]['password']):
-                print("Login successful")
                 self.current_user = username
-                print("You have successfully logged in!")
+                print("Login successful. Welcome, " + ("Admin" if username.lower() == "admin" else "User") + "!")
                 return True
             else:
                 print("Invalid username or password.")
