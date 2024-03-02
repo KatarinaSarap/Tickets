@@ -1,19 +1,34 @@
 [
-  {
-    "type": "Train",
-    "departure": "Tartu",
-    "destination": "Tallinn",
-    "price": 15,
-    "expiration_date": "2023-12-31",
-    "info": "Business class"
-  },
- {
-    "type": "Train",
-    "departure": "Tallinn",
-    "destination": "Tartu",
-    "price": 10,
-    "expiration_date": "2023-12-31",
-    "info": "Economy class"
-  }
-
+    {
+        "type": "Train",
+        "departure": "Tartu",
+        "destination": "Tallinn",
+        "price": 15,
+        "expiration_date": "2024-03-12",
+        "info": "Business class"
+    },
+    {
+        "type": "Train",
+        "departure": "Tallinn",
+        "destination": "Tartu",
+        "price": 10,
+        "expiration_date": "2024-03-12",
+        "info": "Economy class"
+    },
+    {
+        "type": "Plane",
+        "price": 52,
+        "departure": "Tallinn",
+        "destination": "Helsinki",
+        "expiration date": "2024-03-12",
+        "info": "Economy class"
+    },
+    {
+        "type": "Ship",
+        "price": "30",
+        "departure": "Helsinki",
+        "destination": "Tallinn",
+        "expiration date": "2024-03-12",
+        "info": "Business class(a meal included)"
+    }
 ]

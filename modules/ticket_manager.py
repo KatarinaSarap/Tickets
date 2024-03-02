@@ -20,7 +20,7 @@ class TicketManager:
         print("2. Exit")
         choice = input("Please select an option: ")
         if choice == '1':
-            self.buy_ticket(self, user=None)  # Assuming this method now creates tickets
+            self.buy_ticket()  # This method now creates tickets
         elif choice == '2':     # Exit the application
             sys.exit()
 
@@ -56,7 +56,7 @@ class TicketManager:
                 return
             selected_ticket = tickets[choice - 1]
             print(
-                f"Email: Thank you for purchasing a {selected_ticket['info']} {selected_ticket['type']} ticket from {selected_ticket['departure']} to {selected_ticket['destination']} for {selected_ticket['price']} euros.")
+                f"Email: Thank you for purchasing a {selected_ticket['info']} {selected_ticket['type']} ticket from {selected_ticket['departure']} to {selected_ticket['destination']} for {selected_ticket['price']} euros, it expires on {ticket['expiration_date']}.")
         except (ValueError, IndexError):
             print("Invalid selection. Please try again.")
 
