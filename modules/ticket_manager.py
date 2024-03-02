@@ -47,7 +47,7 @@ class TicketManager:
         print("\nAvailable Tickets:")
         for idx, ticket in enumerate(tickets, start=1):
             print(
-                f"{idx}. {ticket['info']} {ticket['type']} ticket from {ticket['departure']} to {ticket['destination']} for {ticket['price']} euros, expires on {ticket['expiration_date']}.")
+                f"{idx}. {ticket['info']} {ticket['type']} ticket from {ticket['departure']} to {ticket['destination']} for {ticket['price']} euros, expires on {ticket.get('expiration_date', 'N/A')}.")
 
         # Allow users to select a ticket
         try:
@@ -56,7 +56,8 @@ class TicketManager:
                 return
             selected_ticket = tickets[choice - 1]
             print(
-                f"Email: Thank you for purchasing a {selected_ticket['info']} {selected_ticket['type']} ticket from {selected_ticket['departure']} to {selected_ticket['destination']} for {selected_ticket['price']} euros, it expires on {ticket['expiration_date']}.")
+                f"Email: Thank you for purchasing a {selected_ticket['info']} {selected_ticket['type']} ticket from {selected_ticket['departure']} to {selected_ticket['destination']} for {selected_ticket['price']} euros, it expires on {selected_ticket.get('expiration_date', 'N/A')}.")
+
         except (ValueError, IndexError):
             print("Invalid selection. Please try again.")
 
@@ -68,7 +69,7 @@ class TicketManager:
         price = input("Enter price: ")
         expiration_date = (datetime.datetime.now() + datetime.timedelta(days=10)).strftime('%Y-%m-%d')
         info = input("Entre extra details about the ticket(Business or Economy):")
-        new_ticket = {"type": ticket_type, "price": price, "departure": departure, "destination": destination, "expiration date": expiration_date, "info": info}
+        new_ticket = {"type": ticket_type, "price": price, "departure": departure, "destination": destination, "expiration_date": expiration_date, "info": info}
 
         try:
             with open(self.tickets_file, 'r+') as file:
@@ -113,3 +114,4 @@ class TicketManager:
 
     if __name__ == "__main__":
         main()
+
