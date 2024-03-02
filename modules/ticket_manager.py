@@ -84,34 +84,37 @@ class TicketManager:
             print("Ticket made successfully.")
 
     def check_ticket(self):
-        username = input("Enter your (user)name to check your ticket: ")
+        # Ask for ticket details
+        ticket_type = input("Enter ticket type (Train/Bus/Plane/Ship): ")
+        departure = input("Enter the departure place (city or station): ")
+        destination = input("Enter the destination (city or station): ")
+        price = input("Enter price: ")
+
         try:
             with open(self.tickets_file, 'r') as file:
                 tickets = json.load(file)
-                user_tickets = [ticket for ticket in tickets if ticket.get("user") == username]
-                if not user_tickets:
-                    print("No tickets found for this user.")
+
+            # Find matching ticket
+            matching_tickets = [ticket for ticket in tickets if
+                                ticket['type'] == ticket_type and ticket['departure'] == departure and ticket[
+                                    'destination'] == destination and str(ticket['price']) == price]
+
+            if not matching_tickets:
+                print("No matching ticket found.")
+                return
+
+            # Check if the matching ticket is valid based on the expiration date
+            now = datetime.datetime.now().date()
+            for ticket in matching_tickets:
+                expiration_date = datetime.datetime.strptime(ticket['expiration_date'], '%Y-%m-%d').date()
+                if expiration_date >= now:
+                    print("Ticket is valid.")
                     return
 
-                    # Check if any ticket is valid based on the expiration date
-                now = datetime.datetime.now()
-                valid_tickets = []
-                for ticket in user_tickets:
-                    expiration_date = ticket.get("expiration_date")
-                    if expiration_date:
-                        if datetime.datetime.strptime(expiration_date, '%Y-%m-%d') >= now:
-                                valid_tickets.append(ticket)
-                    else:
-                        print("Some tickets are missing an expiration date.")
-
-                if valid_tickets:
-                    print("You have valid ticket(s).")
-                    # Optionally, provide details about the valid tickets
-                else:
-                    print("All your tickets have expired or are invalid due to missing expiration date.")
+            # If no valid ticket found
+            print("Ticket is invalid or expired.")
         except FileNotFoundError:
             print("Tickets file not found.")
 
     if __name__ == "__main__":
         main()
-
