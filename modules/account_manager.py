@@ -12,7 +12,7 @@ class AccountManager:
 
     def is_admin_logged_in(self):
         # Checks if the logged-in user is "admin"
-        return self.current_user() == "admin"
+        return self.get_current_user().lower() == "admin"
 
     def create_account(self):
         # Create a new user account
