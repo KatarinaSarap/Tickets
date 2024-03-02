@@ -36,11 +36,11 @@ def main():
                     if not current_user:
                         print("Login failed. Please try again or create an account.")
             elif user_choice == 3:
+                # Differentiate between admin and non-admin users for buying tickets
                 if account_manager.is_admin_logged_in():
                     ticket_manager.admin_menu()
                 else:
-                    # Guest flow
-                    print("Moving to ticket viewing and purchasing.")
+                    # Both guests and logged-in non-admin users proceed to buy tickets as usual
                     ticket_manager.user_menu()
             elif user_choice == 4:
                 if current_user:

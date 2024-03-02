@@ -9,6 +9,7 @@ class AccountManager:
     def __init__(self):
         self.users_file = 'data/users.json'
         self.users = read_json_file(self.users_file) or {}
+        self.current_user = None
 
     def is_admin_logged_in(self):
         # Checks if the logged-in user is "admin"
@@ -65,7 +66,7 @@ class AccountManager:
 
     def get_current_user(self):
         # Get the username of the currently logged-in user
-        return self.get_current_user
+        return self.current_user
 
     def logout(self):
         # Log out the current user
