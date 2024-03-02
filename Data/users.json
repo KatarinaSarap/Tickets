@@ -1,10 +1,9 @@
 {
-    "Kata": {
-        "username": "Kata",
-        "password": "$2b$12$5Yb7DyFaMo9.GJpZ5ZqnSege39.QNuMtdU.6NoG3AQs9bKf3bnoHe"
-    },
     "Admin": {
         "username": "Admin",
         "password": "$2b$12$5ho4YwHFgbbFk.9004AevOQyov4pEVRdNj7u2DNVmcYFG40uhz6OO"
+    },
+    "Test": {
+        "password": "$2b$12$hYm8n.O3hH/QmizunVo2Ve9xHaIRvjKlmPyWLKZPhMYmNm4Mtb1xy"
     }
 }
