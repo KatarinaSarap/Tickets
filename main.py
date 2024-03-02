@@ -19,9 +19,6 @@ def main():
     # Create an instance of the AccountManager and TicketManager classes
     account_manager = AccountManager()
     ticket_manager = TicketManager()
-    current_user = None     # Tracks the logged-in user
-
-
 
     # Display the main menu and get the user's choice
     while True:
@@ -41,7 +38,11 @@ def main():
             elif user_choice == 3:
                 if account_manager.is_admin_logged_in():
                     ticket_manager.admin_menu()
-                else :
+                elif account_manager.is_user_logged_in():
+                    # Regular user flow
+                    ticket_manager.user_menu()
+                else:
+                    # Guest flow
                     print("Continues as a guest...")
                     ticket_manager.user_menu()
             elif user_choice == 4:

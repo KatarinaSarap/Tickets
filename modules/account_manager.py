@@ -9,12 +9,10 @@ class AccountManager:
     def __init__(self):
         self.users_file = 'data/users.json'
         self.users = read_json_file(self.users_file) or {}
-        self.current_user = None
 
     def is_admin_logged_in(self):
-        # Implement logic to check if the logged-in user is an admin
-        # This is a placeholder; adjust according to your authentication logic
-        return self.current_user_role == 'admin'
+        # Checks if the logged-in user is "admin"
+        return self.current_user() == "admin"
 
     def create_account(self):
         # Create a new user account
@@ -39,7 +37,7 @@ class AccountManager:
             print("Account created successfully.")
         except FileNotFoundError:
             # If the file doesn't exist, create it and add the new user
-            with open(self.tickets_file, 'w') as file:
+            with open(self.users_file, 'w') as file:
                 json.dump({username: new_user}, file, indent=4)
             print("Account created successfully.")
 
@@ -54,8 +52,6 @@ class AccountManager:
             if username in users and verify_password(password, users[username]['password']):
                 print("Login successful")
                 self.current_user = username
-                # Example adjustment: Set role for the current session
-                self.current_user_role = users[username].get('role', 'regular')  # Default to 'regular' if not specified
                 print("You have successfully logged in!")
                 return True
             else:
