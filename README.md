@@ -1,76 +1,57 @@
-User Manual for Ticket Purchase and Verification System
-Functionality list(all possible functionalities
-# Introduction
+# Ticket Purchase and Verification System
 
-This manual provides guidance on using the Ticket Purchase and Verification System, a software solution designed for managing user accounts and ticket transactions, including purchasing and verifying tickets for various transportation services.
+## Overview
+The Ticket Purchase and Verification System is a comprehensive software solution designed to facilitate the management of user accounts and ticket transactions for various transportation services. It offers a user-friendly interface for purchasing and verifying tickets.
 
-System Requirements
+## Features and Functionalities
+- **Navigation:**
+  - An easy to navigate menu
+  - The user is asked for input to find out what action they want to take (create account, log in, purchase a ticket, check a ticket or exit the program)
+- **Account Management:**
+  - Create user accounts with secure password storage.
+  - User login and logout capabilities.
+  - Reserved admin role for elevated access and functionalities.
 
-Python 3.x installed on your system.
-The bcrypt package for Python (install via pip with pip install bcrypt).
+- **Ticket Transactions:**
+  - Purchase tickets for transportation services (Train, Bus, Plane, Ship).
+  - A ticket can be purchased with or without an account.
+  - View available tickets with detailed information (type, departure, destination, price, extra infromation(for exampe economy or business class)).
+  - After the purchase the user is sent a message, which includes all the information about the ticket.
+  - Verify ticket validity based on type, departure, destination, and price.
 
-Starting the Application:
+- **Admin(only) Features:**
+  - Exclusive access to ticket creation tools.
+  - The Admin can create new tickets with specified details.
 
-Navigate to the project directory in your terminal.
-Run the application using Python with the command: python main.py.
+## System Requirements
+- Python 3.x
+- bcrypt package (Install via pip with `pip install bcrypt`)
 
-Main Menu Options:
+## Installation
+1. Clone the repository to your local machine.
+2. Ensure Python 3.x is installed on your system.
+3. Install required Python packages:
+4. Navigate to the project directory and run the application:
 
-Upon starting the application, you are presented with the following options:
-1. Create an account
-2. Login
-3. Buy a ticket
-4. Check a ticket
-5. Exit
-Select an option by entering the corresponding number and pressing Enter.
-Account Management
+## Usage
+1. **Starting the Application:**
+- Run `main.py` to start the application and access the main menu.
 
-Creating an Account:
+2. **Navigating the Main Menu:**
+- Use the numeric options to navigate through the application's functionalities.
 
-Select "1" from the main menu.
-Enter a username and password as prompted.
-Note: The username "admin" is reserved and cannot be used.
+3. **Account Management:**
+- Choose to create an account or login from the main menu. Follow the prompts to complete the desired action.
 
-Logging In:
+4. **Purchasing and Verifying Tickets:**
+- Users can purchase available tickets and check their validity through the menu options.
 
-Select "2" from the main menu.
-Enter your username and password.
-The admin username is Admin and password is Pass1ng
-Upon successful login, your role (Admin/User) is displayed.
+5. **Admin Functions:**
+- Admin users have additional options to create tickets.
 
-Logging Out:
+## Logging Out and Exiting the Application
+- To exit and log out,  select "5" from the main menu. A farewell message is displayed, and the program terminates.
 
-To log out, navigate back to the main menu and choose to exit the application or log in with a different account.
-Ticket Management
-
-Buying a Ticket (User):
-
-Log in with your user account.
-Select "3" from the main menu to access the ticket purchase menu.
-Follow prompts to view available tickets and select one to purchase by entering the corresponding number.
-Confirmation of your purchase, along with ticket details, will be displayed.
-
-Creating Tickets (Admin):
-
-Log in with an account that has admin privileges.
-Select "1" from the admin menu to create tickets.
-Enter ticket details as prompted, including type, departure, destination, price, expiration date, and extra infromation (Business class/Economy class).
-Upon successful creation, a confirmation message is displayed.
-
-Checking a Ticket:
-
-Select "4" from the main menu.
-Enter the ticket details as prompted, including type, departure, destination, and price.
-The system will then verify whether the ticket is valid, expired, or not found based on the inputted details and the expiration date.
-
-Exiting the Application:
-
-To exit the application, select "5" from the main menu. A farewell message is displayed, and the program terminates.
-
-Troubleshooting & Support:
-
-File Not Found Errors: Ensure all required data files (users.json, tickets.json) are present in the data directory.
-
-bcrypt Errors: Verify that bcrypt is correctly installed in your Python environment.
-
-Input Errors: Ensure that all inputs match the expected format, especially dates and prices.
+## Troubleshooting
+- bcrypt Errors: Verify that bcrypt is correctly installed in your Python environment.
+- Input Errors: Ensure that all inputs match the expected format, especially dates and prices.
