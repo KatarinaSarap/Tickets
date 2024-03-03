@@ -1,6 +1,6 @@
 User Manual for Ticket Purchase and Verification System
-
-Introduction
+Functionality list(all possible functionalities
+# Introduction
 
 This manual provides guidance on using the Ticket Purchase and Verification System, a software solution designed for managing user accounts and ticket transactions, including purchasing and verifying tickets for various transportation services.
 
@@ -74,5 +74,3 @@ File Not Found Errors: Ensure all required data files (users.json, tickets.json)
 bcrypt Errors: Verify that bcrypt is correctly installed in your Python environment.
 
 Input Errors: Ensure that all inputs match the expected format, especially dates and prices.
-
-For further assistance or to report issues, please contact the developmer.
